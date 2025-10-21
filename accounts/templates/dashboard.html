@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<div class="container mt-5 p-4">
+    <h2 class="text-center">User Login And Registration Dashboard</h2>
+    <ul class="nav nav-tabs" id="registrationTabs" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" id="doctor-tab" data-bs-toggle="tab" href="#doctor" role="tab">Doctor</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="patient-tab" data-bs-toggle="tab" href="#patient" role="tab">Patient</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="admin-tab" data-bs-toggle="tab" href="#admin" role="tab">Admin</a>
+        </li>
+    </ul>
+
+    <div class="tab-content mt-3" id="registrationTabContent">
+        <!-- Doctor Registration Form -->
+        <div class="tab-pane fade show active" id="doctor" role="tabpanel">
+            <h3>Doctor Registration</h3>
+            <form method="POST" action="{% url 'register_doctor' %}">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-primary">Register Doctor</button>
+            </form>
+        </div>
+
+        <!-- Patient Registration Form -->
+        <div class="tab-pane fade" id="patient" role="tabpanel">
+            <h3>Patient Registration</h3>
+            <form method="POST" action="{% url 'register_patient' %}">
+                {% csrf_token %}
+              
+                <button type="submit" class="btn btn-success">Register Patient</button>
+            </form>
+        </div>
+
+        <!-- Admin Registration Form -->
+        <div class="tab-pane fade" id="admin" role="tabpanel">
+            <h3>Admin Registration</h3>
+            <form method="POST" action="{% url 'register_admin' %}">
+                {% csrf_token %}
+                
+                <button type="submit" class="btn btn-danger">Register Admin</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Include Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+{% endblock %}

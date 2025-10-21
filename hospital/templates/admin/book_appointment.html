@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block title %}Book Appointment{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Book an Appointment</h2>
+
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <form method="POST" class="p-4 border rounded shadow bg-light">
+                {% csrf_token %}
+                
+                <div class="mb-3">
+                    <label for="doctor" class="form-label">Select Doctor</label>
+                    <select name="doctor" id="doctor" class="form-select" required>
+                        <option value="" disabled selected>Select a Doctor</option>
+                        {% for doctor in doctors %}
+                            <option value="{{ doctor.id }}">
+                                Dr. {{ doctor.first_name }} {{ doctor.last_name }} - {{ doctor.specialization }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label for="patient" class="form-label">Select Patient</label>
+                    <select name="patient" id="patient" class="form-select" required>
+                        <option value="" disabled selected>Select a Patient</option>
+                        {% for patient in patients %}
+                            <option value="{{ patient.id }}">
+                                {{ patient.first_name }} {{ patient.last_name }} 
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label for="appointment_date" class="form-label">Appointment Date</label>
+                    <input type="date" name="appointment_date" id="appointment_date" class="form-control" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="appointment_time" class="form-label">Appointment Time</label>
+                    <input type="time" name="appointment_time" id="appointment_time" class="form-control" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="symptoms" class="form-label">Describe Your Symptoms (optional)</label>
+                    <textarea name="symptoms" id="symptoms" class="form-control" rows="4" placeholder="Briefly describe any symptoms..."></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-primary w-100">Book Appointment</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

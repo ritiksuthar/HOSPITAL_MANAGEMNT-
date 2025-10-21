@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="list-group">
+                <a href="{% url 'hospital:patient_dashboard' %}" class="list-group-item list-group-item-action">
+                    Dashboard
+                </a>
+                <a href="{% url 'hospital:patient_appointment' %}" class="list-group-item list-group-item-action active">
+                    Book Appointment
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">View Medical History</a>
+                <a href="{% url 'logout' %}" class="list-group-item list-group-item-action text-danger">Logout</a>
+            </div>
+        </div>
+
+        <div class="col-md-9">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h4>Book an Appointment</h4>
+                </div>
+                <div class="card-body">
+                    <form method="POST" action="{% url 'hospital:book_appointment' %}">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="doctor" class="form-label">Select Doctor</label>
+                            <select class="form-select" id="doctor" name="doctor">
+                                <option value="1">Dr. A. Sharma (Cardiologist)</option>
+                                <option value="2">Dr. B. Verma (Dermatologist)</option>
+                                <option value="3">Dr. C. Singh (Neurologist)</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="appointment_date" class="form-label">Appointment Date</label>
+                            <input type="date" class="form-control" id="appointment_date" name="appointment_date" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="appointment_time" class="form-label">Appointment Time</label>
+                            <input type="time" class="form-control" id="appointment_time" name="appointment_time" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="symptoms" class="form-label">Describe Your Symptoms</label>
+                            <textarea class="form-control" id="symptoms" name="symptoms" rows="3" required></textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Book Appointment</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="mt-4">
+                <h5>Your Upcoming Appointments</h5>
+                <table class="table table-bordered mt-3">
+                    <thead>
+                        <tr>
+                            <th>Doctor</th>
+                            <th>Date</th>
+                            <th>Time</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Dr. A. Sharma</td>
+                            <td>28-Mar-2025</td>
+                            <td>10:00 AM</td>
+                            <td><span class="badge bg-warning">Pending</span></td>
+                        </tr>
+                        <tr>
+                            <td>Dr. B. Verma</td>
+                            <td>30-Mar-2025</td>
+                            <td>11:00 AM</td>
+                            <td><span class="badge bg-success">Confirmed</span></td>
+                        </tr>
+                        <tr>
+                            <td>Dr. C. Singh</td>
+                            <td>01-Apr-2025</td>
+                            <td>2:00 PM</td>
+                            <td><span class="badge bg-danger">Cancelled</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

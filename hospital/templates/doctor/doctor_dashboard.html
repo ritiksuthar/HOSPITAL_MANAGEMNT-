@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5 p-4">
+    <div class="row">
+        <div class="col-md-3 mb-4">
+            <div class="card text-center p-3">
+                <h3 class="mt-2 active">PROFILE</h3>
+                <h5 class="mt-2">{{ request.user.doctor.first_name }} {{ request.user.doctor.last_name }}</h5>
+                <h6 class="mt-2">{{request.user.ddoctor.username}}</h6>
+                <p class="text-muted">{{ request.user.doctor.specialization }}</p>
+            </div>
+            <div class="list-group pt-4">
+                <a href="{% url 'hospital:doctor_dashboard' %}" class="list-group-item list-group-item-action active">
+                    Dashboard
+                </a>
+                <a href="{% url 'hospital:view_appointments' %}" class="list-group-item list-group-item-action">
+                    View Appointments
+                </a>
+                <a href="{% url 'hospital:patient_records' %}" class="list-group-item list-group-item-action">
+                    Patient Records
+                </a>
+            </div>
+        </div>
+
+        <div class="col-md-9">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h4>Doctor Dashboard</h4>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="card bg-info text-white mb-3">
+                                <div class="card-body">
+                                    <h5 class="card-title">Total Appointments</h5>
+                                    <p class="card-text">{{ total_appointments }}</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="card bg-warning text-white mb-3">
+                                <div class="card-body">
+                                    <h5 class="card-title">Pending Appointments</h5>
+                                    <p class="card-text">{{ pending_appointments }}</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="card bg-success text-white mb-3">
+                                <div class="card-body">
+                                    <h5 class="card-title">Completed Appointments</h5>
+                                    <p class="card-text">{{ completed_appointments }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h5 class="mt-4">Recent Appointments</h5>
+                    <table class="table table-bordered mt-3">
+                        <thead>
+                            <tr>
+                                <th>Patient Name</th>
+                                <th>Date</th>
+                                <th>Time</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for appointment in recent_appointments %}
+                                <tr>
+                                    <td>{{ appointment.patient.user.username }}</td>
+                                    <td>{{ appointment.appointment_date }}</td>
+                                    <td>{{ appointment.appointment_time }}</td>
+                                    <td>
+                                        {% if appointment.status == 'Pending' %}
+                                            <span class="badge bg-warning">Pending</span>
+                                        {% elif appointment.status == 'Completed' %}
+                                            <span class="badge bg-success">Completed</span>
+                                        {% else %}
+                                            <span class="badge bg-secondary">{{ appointment.status }}</span>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                            {% empty %}
+                                <tr>
+                                    <td colspan="4">No recent appointments found.</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

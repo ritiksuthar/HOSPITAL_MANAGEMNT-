@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container mt-4 p-5">
+        <h2 class="mb-4">Patient Records</h2>
+
+        {% if patients %}
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Patient Name</th>
+                        <th>Age</th>
+                        <th>Gender</th>
+                        <th>Contact</th>
+                        <th>Address</th>
+                        <th>Symptoms</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for patient in patients %}
+                        <tr>
+                            <td>{{ patient.id }}</td>
+                            <td>{{ patient.name }}</td>
+                            <td>{{ patient.age }}</td>
+                            <td>{{ patient.gender }}</td>
+                            <td>{{ patient.contact }}</td>
+                            <td>{{ patient.address }}</td>
+                            <td>{{ patient.symptoms }}</td>
+                            <td>
+                                <a href="{% url 'edit_patient' patient.id %}" class="btn btn-sm btn-primary">Edit</a>
+                                <a href="{% url 'delete_patient' patient.id %}" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this record?')">Delete</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>No patient records found.</p>
+        {% endif %}
+    </div>
+{% endblock %}
