@@ -4,16 +4,24 @@ A Django-based Hospital Management System designed to simplify hospital operatio
 This project helps healthcare institutions manage data efficiently with a secure and user-friendly interface.
 <br>
 📁 Project Structure
+<br>
   hospital_management/
+  <br>
   │
   ├── accounts/              # Handles user authentication (Admin, Doctor, Patient)
+  <br>
   ├── hospital/              # Core hospital functionality (appointments, billing, etc.)
+  <br>
   ├── hospital_management/   # Project configuration and settings
+  <br>
   ├── templates/             # HTML templates for frontend pages
+  <br>
   ├── db.sqlite3             # SQLite database file
+  <br>
   └── manage.py              # Django management script
+  
 <br>
-🚀 Features
+🚀 <h2>Features</h2>
 
   👨‍⚕️ User Roles: Admin, Doctor, and Patient
   
@@ -32,7 +40,8 @@ This project helps healthcare institutions manage data efficiently with a secure
   🔒 Authentication: Secure login and access control
 
   <br>
-  🛠️ Tech Stack
+ <h2> 🛠️ Tech Stack</h2>
+
       Component-Technology
       Framework-Django
       Language-Python
@@ -40,46 +49,46 @@ This project helps healthcare institutions manage data efficiently with a secure
       Database-SQLite
       Template Engine-Django Templates
   <br>
-  ⚙️ Setup Instructions
+  <h3>⚙️ Setup Instructions</h3>
 
-Clone the repository
+<h2>Clone the repository</h2>
 
   git clone https://github.com/yourusername/hospital_management.git
   cd hospital_management
 
 
-Create and activate a virtual environment
+<h2>Create and activate a virtual environment</h2>
 
   python -m venv env
   env\Scripts\activate   # On Windows
   source env/bin/activate  # On Mac/Linux
 
 
-Install dependencies
+<h2>Install dependencies</h2>
 
   pip install -r requirements.txt
 
 
-Run database migrations
+<h2>Run database migrations</h2>
 
   python manage.py makemigrations
   python manage.py migrate
 
 
-Create a superuser
+<h2>Create a superuser</h2>
   
   python manage.py createsuperuser
 
 
-Run the development server
+<h2>Run the development server</h2>
 
   python manage.py runserver
 
 
-Open the app
+<h2>Open the app</h2>
   Visit: http://127.0.0.1:8000
 <br>
-🧠 Future Enhancements
+<h2>🧠 Future Enhancements</h2>
 
   🧾 Generate downloadable patient reports (PDF format)
   
